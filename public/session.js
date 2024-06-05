@@ -5,7 +5,6 @@ async function loadSession(sessionId) {
     return data;
 }
 
-
 // TODO: error handling
 
 window.onload = async () => {
@@ -15,7 +14,7 @@ window.onload = async () => {
     let session = await loadSession(sessionId);
     redrawCounters();
 
-    const webSocket = new WebSocket(`ws://localhost:8080/`);
+    const webSocket = new WebSocket(`ws://${window.location.hostname}:8080/`);
     webSocket.onmessage = async (event) => {
         const data = JSON.parse(event.data);
         if (data.id === sessionId) {
