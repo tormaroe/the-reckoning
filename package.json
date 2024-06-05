@@ -1,0 +1,23 @@
+{
+  "name": "the-reckoning",
+  "version": "1.0.0",
+  "description": "Simple counter app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tormaroe/the-reckoning.git"
+  },
+  "author": "tormaroe",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tormaroe/the-reckoning/issues"
+  },
+  "homepage": "https://github.com/tormaroe/the-reckoning#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "uuid": "^9.0.1"
+  }
+}

@@ -1,0 +1,42 @@
+
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #c6e474;
+    color: rgb(23, 49, 27);
+    text-align: center;
+}
+
+h2 {
+    font-size: small;
+}
+
+footer {
+    text-align: center;
+    font-size: 0.8em;
+    margin-top: 1em;
+}
+
+#counters {
+}
+
+.counter {
+    margin: 0 1em;
+}
+
+.counter-label {
+    width: 200px;
+    display: inline-block;
+    font-size: 1.0em;
+    font-weight: bold;
+    text-align: left;
+}
+
+.increment {
+    font-size: 1.1em;
+    color: green;
+}
+
+.decrement {
+    font-size: 1.1em;
+    color: red;
+}
