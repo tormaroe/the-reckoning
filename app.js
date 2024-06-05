@@ -9,7 +9,9 @@ const sessions = [];
 app.use(express.json());
 app.use(express.static('public'));
 
-const sockserver = new WebSocketServer({ port: 8080 });
+let server = require('http').createServer();
+
+const sockserver = new WebSocketServer({ server });
 sockserver.on('connection', (socket) => {
     console.log('WebSocket connection established');
 });
@@ -105,6 +107,12 @@ app.get('/session/:id', (req, res) => {
     res.send(session);
 });
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+server.on('request', app);
+
+server.listen(port, () => {
+    console.log(`App listening on port ${port}`);
 });
+
+//app.listen(port, () => {
+//    console.log(`Example app listening on port ${port}`);
+//});
