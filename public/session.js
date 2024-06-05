@@ -15,6 +15,15 @@ window.onload = async () => {
     let session = await loadSession(sessionId);
     redrawCounters();
 
+    const webSocket = new WebSocket(`ws://localhost:8080/`);
+    webSocket.onmessage = async (event) => {
+        const data = JSON.parse(event.data);
+        if (data.id === sessionId) {
+            session = data;
+            redrawCounters();
+        }
+    };
+
     function makeCounterButton(text, cssClass, url) {
         const incrementButton = document.createElement('button');
         incrementButton.className = cssClass;
@@ -24,7 +33,7 @@ window.onload = async () => {
                 method: 'POST',
             });
             session = await response.json();
-            redrawCounters();
+            //redrawCounters();
         });
         return incrementButton;
     }
@@ -69,6 +78,6 @@ window.onload = async () => {
         session = await response.json();
         console.log(session);
         
-        redrawCounters();
+        //redrawCounters();
     });
 };

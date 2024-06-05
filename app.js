@@ -1,5 +1,6 @@
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
+const { WebSocketServer, WebSocket } = require('ws');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -7,6 +8,25 @@ const sessions = [];
 
 app.use(express.json());
 app.use(express.static('public'));
+
+const sockserver = new WebSocketServer({ port: 8080 });
+sockserver.on('connection', (socket) => {
+    console.log('WebSocket connection established');
+});
+sockserver.on('close', () => {
+    console.log('WebSocket connection closed');
+});
+sockserver.on('error', (error) => {
+    console.error('WebSocket error:', error);
+});
+
+function publishSession(session) {
+    sockserver.clients.forEach(client => {
+        if (client.readyState === WebSocket.OPEN) {
+            client.send(JSON.stringify(session));
+        }
+    });
+}
 
 app.post('/api/make-session', (req, res) => {
     console.log('POST /api/make-session');
@@ -29,7 +49,9 @@ app.post('/api/add-counter/:id', (req, res) => {
     }
     const { name } = req.body;
     session.counters.push({ name, value: 0 });
+    
     res.send(session);
+    publishSession(session);
 });
 
 app.post('/api/increment-counter/:sessionId/:counterIndex', (req, res) => {
@@ -47,7 +69,9 @@ app.post('/api/increment-counter/:sessionId/:counterIndex', (req, res) => {
         return;
     }
     counter.value++;
+    
     res.send(session);
+    publishSession(session);
 });
 
 app.post('/api/decrement-counter/:sessionId/:counterIndex', (req, res) => {
@@ -65,7 +89,9 @@ app.post('/api/decrement-counter/:sessionId/:counterIndex', (req, res) => {
         return;
     }
     counter.value--;
+    
     res.send(session);
+    publishSession(session);
 });
 
 app.get('/session/:id', (req, res) => {
