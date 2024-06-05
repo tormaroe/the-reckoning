@@ -8,6 +8,7 @@ body {
 
 h2 {
     font-size: small;
+    color: slategray;
 }
 
 footer {
@@ -16,7 +17,16 @@ footer {
     margin-top: 1em;
 }
 
+button {
+    padding: 15px 32px;
+    border: none;
+    background-color: #008CBA;
+    color: white;
+    cursor: pointer;
+}
+
 #counters {
+    margin-bottom: 10px;
 }
 
 .counter {
@@ -32,15 +42,19 @@ footer {
 }
 
 .increment {
+    padding: 0.2em 0.5em;
     margin-left: 1em;
     margin-bottom: 0.2em;
     font-size: 1.1em;
-    color: green;
+    color: white;
+    background-color: #04AA6D;
 }
 
 .decrement {
+    padding: 0.2em 0.5em;
     margin-left: 1em;
     margin-bottom: 0.2em;
     font-size: 1.1em;
-    color: red;
+    color: white;
+    background-color: #f44336;
 }
